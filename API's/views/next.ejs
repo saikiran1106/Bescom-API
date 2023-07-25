@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        .details-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .details-section {
+                padding: 10px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="details-section">
+            <h2>User Details:</h2>
+            <p><strong>Name:</strong>
+                <%= user.name %>
+            </p>
+            <p><strong>Mobile:</strong>
+                <%= user.mobile %>
+            </p>
+            <p><strong>Address:</strong>
+                <%= user.address %>
+            </p>
+            <p><strong>Account Number:</strong>
+                <%= user.Accnt_no %>
+            </p>
+        </div>
+
+        <div class="details-section">
+            <h2>Usage Information:</h2>
+            <p><strong>Bill Date:</strong>
+                <%= user.usage.BillDate %>
+            </p>
+            <p><strong>Amount:</strong>
+                <%= user.usage.amount %>
+            </p>
+            <p><strong>Units:</strong>
+                <%= user.usage.units %>
+            </p>
+            <p><strong>Transaction Number:</strong>
+                <%= user.usage.transaction_number %>
+            </p>
+            <p><strong>Payment Date:</strong>
+                <%= user.usage.payment_Date %>
+            </p>
+            <p><strong>Payment Mode:</strong>
+                <%= user.usage.Payment_Mode %>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

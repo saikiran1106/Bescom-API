@@ -1,0 +1,118 @@
+body {
+    background-image: url("https://images.pexels.com/photos/3657143/pexels-photo-3657143.jpeg?auto=compress&cs=tinysrgb&w=600");
+    height: 100vh;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: #ffffff;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Styling for the OTP modal */
+.otp-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.otp-content {
+    background-color: #fff;
+    padding: 20px;
+    padding-right: 40px;
+    width: 300px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.otp-verify-button {
+    padding: 10px;
+    border-width: 0;
+    border-radius: 10px;
+    background-color: #14cce0;
+    color: #ffffff;
+}
+
+.close-btn {
+    float: right;
+    cursor: pointer;
+}
+
+/* Media Query for responsiveness */
+@media screen and (max-width: 600px) {
+    .container {
+        max-width: 100%;
+        margin: 30px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .container {
+        max-width: 40%;
+    }
+}

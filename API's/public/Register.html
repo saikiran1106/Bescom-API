@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Register Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h1>Register</h1>
+    <form>
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" pattern="[0-9]{10}" name="mobile" required>
+        <br>
+        <h1></h1>
+        <label for="otp">OTP:</label>
+        <h1></h1>
+        <input type="text" id="otp" name="otp" required>
+        <h1></h1>
+        <br>
+        <button type="button" id="sendOTPButton" onclick="sendOTP()">Send OTP</button>
+        <button type="button" id="verifyOTPButton" onclick="verifyOTP()" disabled>Verify OTP</button>
+        <button type="submit" id="registerButton" disabled>Register</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const mobileInput = document.getElementById('mobile');
+        const otpInput = document.getElementById('otp');
+        const sendOTPButton = document.getElementById('sendOTPButton');
+        const verifyOTPButton = document.getElementById('verifyOTPButton');
+        const registerButton = document.getElementById('registerButton');
+
+        let verificationSid = '';
+
+        function sendOTP() {
+            const mobileValue = mobileInput.value.trim();
+
+            if (mobileValue !== '') {
+                $.ajax({
+                    url: '/send-otp',
+                    method: 'POST',
+                    data: { mobile: mobileValue },
+                    success: function (response) {
+                        verificationSid = response.sid;
+                        enableVerifyOTP();
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            }
+        }
+
+        function verifyOTP() {
+            const otpValue = otpInput.value.trim();
+
+            if (otpValue !== '' && verificationSid !== '') {
+                $.ajax({
+                    url: '/verify-otp',
+                    method: 'POST',
+                    data: { otp: otpValue, sid: verificationSid },
+                    success: function (response) {
+                        if (response.verified) {
+                            enableRegisterButton();
+                        } else {
+                            console.log('OTP verification failed.');
+                        }
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            }
+        }
+
+        function enableVerifyOTP() {
+            sendOTPButton.disabled = true;
+            verifyOTPButton.disabled = false;
+        }
+
+        function enableRegisterButton() {
+            registerButton.disabled = false;
+        }
+
+        mobileInput.addEventListener('input', validateForm);
+        otpInput.addEventListener('input', validateForm);
+
+        function validateForm() {
+            const mobileValue = mobileInput.value.trim();
+            const otpValue = otpInput.value.trim();
+
+            if (mobileValue !== '' && otpValue !== '') {
+                registerButton.disabled = false;
+            } else {
+                registerButton.disabled = true;
+            }
+        }
+    </script>
+</body>
+
+</html>

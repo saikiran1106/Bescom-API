@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In</title>
+<link rel="stylesheet" href="styles.css">
+<!-- Add your CSS link here -->
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sign In</h1>
+        <form action="/signin_process" method="post">
+            <div>
+                <label for="did">DID:</label>
+                <input type="text" id="did" name="did" required>
+            </div>
+            <p>OR</p>
+            <div>
+                <label for="number">Mobile Number:</label>
+                <input type="text" id="number" name="username" required>
+            </div>
+            <div>
+                <input type="submit" value="Sign In" id="signin-btn" onclick="showOTPModal()">
+            </div>
+        </form>
+        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+    </div>
+
+    <div class="otp-modal" id="otpModal">
+        <div class="otp-content">
+            <span class="close-btn" onclick="closeOTPModal()">&times;</span>
+            <h2>Enter your OTP</h2>
+            <input type="text" id="otp-input" placeholder="Enter OTP">
+            <button onclick="validateOTP()" class="otp-verify-button">Verify</button>
+        </div>
+    </div>
+
+    <script>
+        function showOTPModal() {
+            const otpModal = document.getElementById("otpModal");
+            otpModal.style.display = "block";
+        }
+
+        function closeOTPModal() {
+            const otpModal = document.getElementById("otpModal");
+            otpModal.style.display = "none";
+        }
+
+        function validateOTP() {
+            // Get the entered OTP
+            const otpInput = document.getElementById("otp-input").value;
+
+            // You can add your OTP validation logic here
+            // For demonstration purposes, let's assume the OTP is "1234"
+            const correctOTP = "1234";
+
+            if (otpInput === correctOTP) {
+                alert("OTP is valid. Sign-in successful!");
+                closeOTPModal();
+                // Perform further sign-in actions if needed
+            } else {
+                alert("Invalid OTP. Please try again.");
+            }
+        }
+    </script>
+</body>
+
+</html>

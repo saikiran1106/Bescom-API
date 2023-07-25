@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+       
+    <meta charset="UTF-8">
+       
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up</title>
+        <!-- Add your CSS link here -->
+    <link rel="stylesheet" type="text/css" href="signup.css">
+</head>
+
+<body>
+            <div class="container">
+                    <h1>Sign Up</h1>
+                    <form action="/signup_process" method="post">
+                            <div>
+                                    <label for="number">Mobile Number:</label>
+                                    <input type="text" id="number" name="username" required>
+                                </div>
+                            <div>
+                                    <label for="password">Password:</label>
+                                    <input type="password" id="password" name="password" required>
+                                </div>
+                            <div>
+                                    <input type="submit" value="Sign Up" id="signup-btn" onclick="showOTPModal()">
+                                </div>
+                        </form>
+                    <p>Already have an account? <a href="/login">Log In</a></p>
+                </div>
+           
+            <div class="otp-modal" id="otpModal">
+                <div class="otp-content">
+                        <span class="close-btn" onclick="closeOTPModal()">&times;</span>
+                        <h2>Enter your OTP</h2>
+                        <input type="text" id="otp-input" placeholder="Enter OTP">
+                        <button onclick="validateOTP()" class="otp-verify-button">Verify</button>
+                    </div>
+            </div>
+       
+       
+    <script src="script.js"></script>
+</body>
+
+</html>
