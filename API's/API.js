@@ -13,6 +13,7 @@ const dbName = "admin";
 
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+const Chart = require("chart.js");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -319,6 +320,73 @@ app.post("/verify-otp", async (req, res) => {
   }
 })
 
+/**
+ * 
+@openapi
+
+ * /monthly-consumption:
+ *   post:
+ *     summary: Fetch user's monthly energy consumption data.
+ *     description: Retrieve monthly energy consumption data for the user based on their mobile number.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               mobile:
+ *                 type: string
+ *                 
+ *     responses:
+ *       '200':
+ *         description: Successful response. Returns monthly energy consumption data.
+ *         
+ *       '404':
+ *         description: User not found or data not available.
+ *       '500':
+ *         description: An error occurred while fetching data.
+ */
+
+app.post("/monthly-consumption", async (req, res) => {
+  const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    },
+  });
+
+  try {
+    await client.connect();
+    const database = client.db("test");
+    const details = database.collection("Details");
+
+    const mobile = req.body.mobile;
+
+    // Query for a user with the provided mobile number
+    const query = { mobile: mobile };
+    const user = await details.findOne(query);
+
+    if (!user) {
+      // User not found
+      return res.status(404).json({ error: "User not found or data not available." });
+    }
+
+    if (!user.monthly_consumption) {
+      // Monthly consumption data not available
+      return res.status(404).json({ error: "Monthly consumption data not available for the user." });
+    }
+
+    // Return the monthly consumption data
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred.");
+  } finally {
+    await client.close();
+  }
+});
 
 
 
